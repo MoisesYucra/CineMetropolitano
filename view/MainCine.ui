@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>800</width>
+    <height>600</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget"/>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>800</width>
+     <height>26</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuInicio">
+    <property name="title">
+     <string>Inicio</string>
+    </property>
+    <addaction name="actionLogin"/>
+   </widget>
+   <widget class="QMenu" name="menuMantenimiento">
+    <property name="title">
+     <string>Mantenimiento</string>
+    </property>
+    <addaction name="actionAgregar_Pelicula"/>
+    <addaction name="actionEliminar_Pelicula"/>
+   </widget>
+   <addaction name="menuInicio"/>
+   <addaction name="menuMantenimiento"/>
+  </widget>
+  <action name="actionLogin">
+   <property name="text">
+    <string>Login</string>
+   </property>
+  </action>
+  <action name="actionAgregar_Pelicula">
+   <property name="text">
+    <string>Agregar Pelicula</string>
+   </property>
+  </action>
+  <action name="actionActualizar_Pelicula">
+   <property name="text">
+    <string>Actualizar Pelicula</string>
+   </property>
+  </action>
+  <action name="actionEliminar_Pelicula">
+   <property name="text">
+    <string>Eliminar Pelicula</string>
+   </property>
+  </action>
+  <action name="actionCartelera">
+   <property name="text">
+    <string>Cartelera</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
