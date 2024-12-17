@@ -1,14 +1,15 @@
+# modelos/Cliente.py
 class Cliente:
-    def __init__(self, _IDCliente, _nomCliente, _apeCliente, _tipoDocCliente, 
-                 _numeroDocCliente, _telefonoCliente, _correoCliente, 
-                 _generoCliente, _idRolCliente) -> None:
-        self.IDCliente = _IDCliente
-        self.nomCliente = _nomCliente
-        self.apeCliente = _apeCliente
-        self.tipoDocCliente = _tipoDocCliente
-        self.numeroDocCliente = _numeroDocCliente
-        self.telefonoCliente = _telefonoCliente
-        self.correoCliente = _correoCliente
-        self.generoCliente = _generoCliente
-        self.idRolCliente = _idRolCliente
+    def __init__(self, id_cliente, nombre, apellido, tipo_doc, numero_doc, telefono, correo, genero, id_rol):
+        self.id_cliente = id_cliente
+        self.nombre = nombre
+        self.apellido = apellido
+        self.tipo_doc = tipo_doc
+        self.numero_doc = numero_doc
+        self.telefono = telefono
+        self.correo = correo
+        self.genero = genero
+        self.id_rol = id_rol
 
+    def __str__(self):
+        return f"ID: {self.id_cliente}, Nombre: {self.nombre} {self.apellido}, Correo: {self.correo}"

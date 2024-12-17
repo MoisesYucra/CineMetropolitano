@@ -1,12 +1,13 @@
 import mysql.connector
 
 class ConexionBaseDatos:
+    def __init__(self):
+        self.conexion = mysql.connector.connect(
+            host='localhost',
+            database='bdcine',
+            user='root',
+            password='123456'
+        )
 
-    def __init__(self) -> None:
-        self.conexion = mysql.connector.connect(host='localhost', 
-                                                database='bdcine',
-                                                user='root',
-                                                password='123456')
-    def getConexion(self):
+    def get_conexion(self):
         return self.conexion
-
