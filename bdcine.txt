@@ -1,0 +1,73 @@
+CREATE DATABASE IF NOT EXISTS BDCINE;
+
+
+USE BDCINE;
+
+CREATE TABLE `clientes` (
+  `id_cliente` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(50) NOT NULL,
+  `apellido` VARCHAR(50) NOT NULL,
+  `tipo_doc` VARCHAR(50) NOT NULL,
+  `numero_doc` VARCHAR(20) NOT NULL,
+  `telefono` VARCHAR(15) NOT NULL,
+  `correo` VARCHAR(200) NOT NULL,
+  `genero` CHAR(1) NOT NULL CHECK (`genero` IN ('M', 'F')),
+  `id_rol` INT NOT NULL,
+  PRIMARY KEY (`id_cliente`),
+  CONSTRAINT `fk_rol_cliente` FOREIGN KEY (`id_rol`) REFERENCES `roles` (`id_rol`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `cartelera` (
+  `id_cartelera` INT NOT NULL AUTO_INCREMENT,
+  `hora_inicio` DATETIME NOT NULL,
+  `hora_final` DATETIME NOT NULL,
+  `fecha` DATE NOT NULL,
+  `id_sala` INT NOT NULL,
+  PRIMARY KEY (`id_cartelera`),
+  CONSTRAINT `fk_sala_cartelera` FOREIGN KEY (`id_sala`) REFERENCES `salas` (`id_sala`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `peliculas` (
+  `id_pelicula` INT NOT NULL AUTO_INCREMENT,
+  `titulo` VARCHAR(50) NOT NULL,
+  `duracion` TIME NOT NULL,
+  `genero` VARCHAR(50) NOT NULL,
+  `clasificacion` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`id_pelicula`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+
+CREATE TABLE `salas` (
+  `id_sala` INT NOT NULL AUTO_INCREMENT,
+  `capacidad` VARCHAR(70), 
+  `estado` TINYINT(1) NOT NULL DEFAULT 1, -- 1 = Llena, 0 = Libre
+  PRIMARY KEY (`id_sala`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `ventas` (
+  `id_venta` INT NOT NULL AUTO_INCREMENT,
+  `fecha` DATETIME NOT NULL,
+  `asientos_reservados` INT NOT NULL,
+  `tipo_pago` ENUM('Efectivo', 'Tarjeta', 'Transferencia') NOT NULL,
+  `estado` TINYINT(1) NOT NULL DEFAULT 1, -- 1 = activa, 0 = cancelada
+  `id_cliente` INT NOT NULL,
+  PRIMARY KEY (`id_venta`),
+  CONSTRAINT `fk_cliente_venta` FOREIGN KEY (`id_cliente`) REFERENCES `clientes` (`id_cliente`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `detalle_ventas` (
+  `id_detalle` INT NOT NULL AUTO_INCREMENT,
+  `id_venta` INT NOT NULL,
+  `id_pelicula` INT NOT NULL,
+  `cantidad` INT NOT NULL,
+  `pago` DECIMAL(10, 2) NOT NULL,
+  PRIMARY KEY (`id_detalle`),
+  CONSTRAINT `fk_venta_detalle` FOREIGN KEY (`id_venta`) REFERENCES `ventas` (`id_venta`),
+  CONSTRAINT `fk_pelicula_detalle` FOREIGN KEY (`id_pelicula`) REFERENCES `peliculas` (`id_pelicula`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE `roles` (
+  `id_rol` INT NOT NULL AUTO_INCREMENT,
+  `nombre` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`id_rol`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
